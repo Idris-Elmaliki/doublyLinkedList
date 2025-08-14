@@ -1,5 +1,4 @@
 #include <iostream>
-#include <cstring>
 /*
     * There are very minute differences when comparing a single linked list to its doubly counterpart
     * The only difference found in the logic is the inclusion of the prev pointer as well as small optimizations for better written code
