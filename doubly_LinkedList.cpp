@@ -5,9 +5,10 @@
     * So my comments will reflect that difference and only explain the parts where these differences reside
 */
 
+template<class T>
 class Node {
 public:
-    int value; 
+    T value; 
     Node* next; 
     Node* prev; 
 
@@ -18,12 +19,13 @@ public:
     }
 }; 
 
+template<class T>
 class DoublyLinkedList {
-    Node *head, *tail; 
+    Node<T> *head, *tail; 
     int length;
 
 public: 
-    DoublyLinkedList(const int &value = 0) { 
+    DoublyLinkedList(const T &value) { 
         Node* newNode = new Node(value); 
         head = newNode; 
         tail = newNode;  
@@ -41,7 +43,7 @@ public:
         std::cout << '\n'; 
     }
 
-    void append(const int &value) { 
+    void append(const T &value) { 
         Node* newNode = new Node(value); 
 
         if(length == 0) {
@@ -56,7 +58,7 @@ public:
         length++; 
     }
     
-    void prepend(const int &value) { 
+    void prepend(const T &value) { 
         Node* newNode = new Node(value);
 
         if(length == 0) {
@@ -109,7 +111,7 @@ public:
         --length; 
     }
     
-    Node* getNode(const int &index) { 
+    Node* getNode(const T &index) { 
         Node* temp = head;
 
         if(index < 0 || index >= length) {
@@ -123,7 +125,7 @@ public:
         return temp; 
     }
 
-    int getNodeValue(const int &index) {
+    int getNodeValue(const T &index) {
         Node* temp = head;
 
         if(index < 0 || index >= length) {
@@ -137,7 +139,7 @@ public:
         return temp->value; 
     }
     
-    bool setNode(const int &index, const int &value) { 
+    bool setNode(const int &index, const T &value) { 
         if(index < 0 || index >= length) {
             std::cout << "Invalid index!\n"; 
             return false; 
@@ -152,7 +154,7 @@ public:
         return false; 
     }
     
-    bool insertNode(const int &index, const int &value) { 
+    bool insertNode(const int &index, const T &value) { 
         if(index < 0 || index > length) {
             std::cout << "Invalid index!\n"; 
             return false; 
