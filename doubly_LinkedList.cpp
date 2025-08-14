@@ -202,27 +202,6 @@ public:
         --length; 
     }
 
-    bool isPalindrome() {
-        if(length == 0)
-            return false; 
-        else if(head->value != tail->value) 
-            return false; 
-        
-        Node* headTemp = head; 
-        Node* tailTemp = tail; 
-        
-        while(headTemp != tailTemp || (headTemp != nullptr && tailTemp != nullptr)) {
-            if(headTemp->value != tailTemp->value) {
-                return false; 
-            }
-            
-            headTemp = headTemp->next; 
-            tailTemp = tailTemp->prev; 
-        }
-        
-        return true; 
-    }
-
     void reverse() {
         Node* current = head; 
         Node* temp = nullptr; 
