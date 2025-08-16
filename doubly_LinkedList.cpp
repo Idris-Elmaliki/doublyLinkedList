@@ -125,7 +125,7 @@ public:
         return temp; 
     }
 
-    int getNodeValue(const T &index) {
+    T getNodeValue(const T &index) {
         Node* temp = head;
 
         if(index < 0 || index >= length) {
