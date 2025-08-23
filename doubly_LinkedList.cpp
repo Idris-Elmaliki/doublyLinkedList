@@ -21,14 +21,15 @@ public:
 
 template<class T>
 class DoublyLinkedList {
-    Node *head, *tail; 
-    T length;
+    Node<T> *head, *tail; 
+    int length;
 
 public: 
-    DoublyLinkedList(const T &data = 0) { 
+    DoublyLinkedList(const T &data) { 
         Node<T>* newNode = new Node<T>(data); 
         head = newNode; 
         tail = newNode;  
+
         length = 1; 
     }
 
@@ -75,7 +76,7 @@ public:
     }
     
     void deleteFirst() { 
-        Node *tempNode = head; // should be a global within the function
+        Node<T>* tempNode = head; // should be a global within the function
 
         if(length == 0) 
             return; 
@@ -94,7 +95,7 @@ public:
     }
      
     void deleteLast() { 
-        Node *previousNode = tail;
+        Node<T>* previousNode = tail;
 
         if(length == 0) 
             return; 
@@ -167,8 +168,8 @@ public:
             append(data); 
         }
         else {
-            Node *prevNode = getNode(index - 1);
-            Node *newNode = new Node<T>(data); 
+            Node<T>* prevNode = getNode(index - 1);
+            Node<T>* *newNode = new Node<T>(data); 
 
             newNode->next = prevNode->next; 
             newNode->prev = prevNode; 
