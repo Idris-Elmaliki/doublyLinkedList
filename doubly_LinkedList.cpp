@@ -8,12 +8,12 @@
 template<class T>
 class Node {
 public:
-    T value; 
-    Node* next; 
-    Node* prev; 
+    T data; 
+    Node<T>* next; 
+    Node<T>* prev; 
 
-    Node(const int &value)
-    : value(value) {
+    Node(const T &data)
+    : data(data) {
         next = nullptr;
         prev = nullptr; // stores the node previous to it, but is automatically set to nullptr
     }
@@ -21,30 +21,30 @@ public:
 
 template<class T>
 class DoublyLinkedList {
-    Node<T> *head, *tail; 
-    int length;
+    Node *head, *tail; 
+    T length;
 
 public: 
-    DoublyLinkedList(const T &value) { 
-        Node* newNode = new Node(value); 
+    DoublyLinkedList(const T &data = 0) { 
+        Node<T>* newNode = new Node<T>(data); 
         head = newNode; 
         tail = newNode;  
         length = 1; 
     }
 
     void printDLL() { 
-        Node* temp = head; 
+        Node<T>* temp = head; 
 
         while(temp != nullptr)  {
-            std::cout << temp->value << ' '; 
+            std::cout << temp->data << ' '; 
             temp = temp->next;
         }
 
         std::cout << '\n'; 
     }
 
-    void append(const T &value) { 
-        Node* newNode = new Node(value); 
+    void append(const T &data) { 
+        Node<T>* newNode = new Node<T>(data); 
 
         if(length == 0) {
             head = newNode;
@@ -58,8 +58,8 @@ public:
         length++; 
     }
     
-    void prepend(const T &value) { 
-        Node* newNode = new Node(value);
+    void prepend(const T &data) { 
+        Node<T>* newNode = new Node<T>(data);
 
         if(length == 0) {
             head = newNode;
@@ -111,8 +111,8 @@ public:
         --length; 
     }
     
-    Node* getNode(const T &index) { 
-        Node* temp = head;
+    Node<T>* getNode(const int &index) { 
+        Node<T>* temp = head;
 
         if(index < 0 || index >= length) {
             std::cout << "Invalid index, cannot complete this operation\n"; 
@@ -125,8 +125,8 @@ public:
         return temp; 
     }
 
-    T getNodeValue(const T &index) {
-        Node* temp = head;
+    T getNodedata(const int &index) {
+        Node<T>* temp = head;
 
         if(index < 0 || index >= length) {
             std::cout << "Invalid index, cannot complete this operation\n"; 
@@ -136,39 +136,39 @@ public:
             for(int i = 0; i < index; i++) 
                 temp = temp->next;
         
-        return temp->value; 
+        return temp->data; 
     }
     
-    bool setNode(const int &index, const T &value) { 
+    bool setNode(const int &index, const T &data) { 
         if(index < 0 || index >= length) {
             std::cout << "Invalid index!\n"; 
             return false; 
         }
         
-        Node* temp = getNode(index);
+        Node<T>* temp = getNode(index);
         
         if(temp != nullptr) {
-            temp->value = value; 
+            temp->data = data; 
             return true; 
         } 
         return false; 
     }
     
-    bool insertNode(const int &index, const T &value) { 
+    bool insertNode(const int &index, const T &data) { 
         if(index < 0 || index > length) {
             std::cout << "Invalid index!\n"; 
             return false; 
         }
 
         if(index == 0) {
-            prepend(value); 
+            prepend(data); 
         }
         else if(index == length) {
-            append(value); 
+            append(data); 
         }
         else {
             Node *prevNode = getNode(index - 1);
-            Node *newNode = new Node(value); 
+            Node *newNode = new Node<T>(data); 
 
             newNode->next = prevNode->next; 
             newNode->prev = prevNode; 
@@ -191,8 +191,8 @@ public:
             return deleteLast(); 
         }
         else {
-            Node* temp = getNode(index); 
-            Node* previous_temp = getNode(index-1); 
+            Node<T>* temp = getNode(index); 
+            Node<T>* previous_temp = getNode(index-1); 
 
             previous_temp->next = temp->next; 
             temp->next->prev = previous_temp; // I'm accessing the previous Node for temp and setting it to point to previous_temp 
@@ -203,8 +203,8 @@ public:
     }
 
     void reverse() {
-        Node* current = head; 
-        Node* temp = nullptr; 
+        Node<T>* current = head; 
+        Node<T>* temp = nullptr; 
 
         while(current != nullptr) {
             temp = current->prev; 
@@ -219,7 +219,7 @@ public:
     }
 
     ~DoublyLinkedList() {
-        Node* temp = head; 
+        Node<T>* temp = head; 
 
         while(head != nullptr) {
             head = temp->next; 
